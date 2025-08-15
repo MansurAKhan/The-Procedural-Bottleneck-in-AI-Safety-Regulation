@@ -1,0 +1,147 @@
+Write a Python script that, given a list of Congress.gov bill URLs, scrapes the following data fields for each bill:
+
+- Chamber (House or Senate)
+- Sponsor Party (e.g., Democrat, Republican, Independent)
+- Bipartisan? (True if there are sponsors from more than one party, else False)
+- Introduced Month (month name or number when the bill was introduced)
+- Number of Sponsors (count of all sponsors including original sponsor and co-sponsors)
+
+Requirements:
+
+1. The script should fetch each bill's page from Congress.gov.
+2. Parse the HTML to extract the above information accurately.
+3. Handle different bill types such as House bills, Senate bills, House resolutions, and Senate amendments gracefully.
+4. Output the data in a CSV format with one record per bill.
+5. Include error handling for invalid URLs or missing data.
+6. The script should be efficient enough to process around 125 bill URLs.
+
+Here is the input list of URLs:
+
+[
+https://www.congress.gov/bill/115th-congress/house-bill/4829
+https://www.congress.gov/bill/115th-congress/senate-bill/3502
+https://www.congress.gov/bill/116th-congress/house-bill/2575
+https://www.congress.gov/bill/116th-congress/senate-bill/1363
+https://www.congress.gov/bill/116th-congress/house-bill/7096
+https://www.congress.gov/bill/116th-congress/house-bill/827
+https://www.congress.gov/bill/116th-congress/senate-bill/1558
+https://www.congress.gov/bill/116th-congress/house-resolution/153
+https://www.congress.gov/bill/116th-congress/senate-bill/3901
+https://www.congress.gov/bill/116th-congress/senate-bill/3890
+https://www.congress.gov/bill/116th-congress/house-bill/7339
+https://www.congress.gov/bill/116th-congress/house-bill/8183
+https://www.congress.gov/bill/116th-congress/house-bill/8128
+https://www.congress.gov/bill/116th-congress/senate-bill/4082
+https://www.congress.gov/bill/116th-congress/house-bill/7856
+https://www.congress.gov/amendment/116th-congress/senate-amendment/1977
+https://www.congress.gov/amendment/116th-congress/senate-amendment/2301
+https://www.congress.gov/bill/117th-congress/senate-bill/2551
+https://www.congress.gov/bill/117th-congress/senate-bill/1353
+https://www.congress.gov/bill/117th-congress/senate-bill/1257
+https://www.congress.gov/bill/117th-congress/house-bill/4468
+https://www.congress.gov/bill/117th-congress/house-bill/4469
+https://www.congress.gov/bill/117th-congress/house-bill/6553
+https://www.congress.gov/bill/117th-congress/house-bill/7811
+https://www.congress.gov/bill/117th-congress/house-bill/3844
+https://www.congress.gov/bill/117th-congress/house-bill/3723
+https://www.congress.gov/bill/117th-congress/house-bill/5467
+https://www.congress.gov/bill/117th-congress/senate-bill/2904
+https://www.congress.gov/bill/117th-congress/senate-bill/1705
+https://www.congress.gov/bill/117th-congress/senate-bill/1260
+https://www.congress.gov/bill/117th-congress/house-bill/2153
+https://www.congress.gov/bill/117th-congress/house-bill/7683
+https://www.congress.gov/bill/117th-congress/senate-bill/3035
+https://www.congress.gov/bill/117th-congress/house-bill/7296
+https://www.congress.gov/bill/117th-congress/house-bill/7776
+https://www.congress.gov/bill/117th-congress/senate-bill/5351
+https://www.congress.gov/bill/118th-congress/senate-bill/1356
+https://www.congress.gov/bill/118th-congress/senate-bill/2770
+https://www.congress.gov/bill/118th-congress/house-bill/4223
+https://www.congress.gov/bill/118th-congress/senate-bill/1564
+https://www.congress.gov/bill/118th-congress/senate-bill/1596
+https://www.congress.gov/bill/118th-congress/house-bill/3044
+https://www.congress.gov/bill/118th-congress/house-bill/7694
+https://www.congress.gov/bill/118th-congress/house-bill/1718
+https://www.congress.gov/bill/118th-congress/house-bill/3369
+https://www.congress.gov/bill/118th-congress/senate-bill/1626
+https://www.congress.gov/bill/118th-congress/senate-bill/2691
+https://www.congress.gov/bill/118th-congress/senate-bill/2765
+https://www.congress.gov/bill/118th-congress/house-bill/9403
+https://www.congress.gov/bill/118th-congress/house-bill/8384
+https://www.congress.gov/bill/118th-congress/senate-bill/4394
+https://www.congress.gov/bill/118th-congress/house-bill/4503
+https://www.congress.gov/bill/118th-congress/house-resolution/66
+https://www.congress.gov/bill/118th-congress/senate-bill/2293
+https://www.congress.gov/bill/118th-congress/house-resolution/649
+https://www.congress.gov/bill/118th-congress/house-bill/9309
+https://www.congress.gov/bill/118th-congress/senate-bill/3205
+https://www.congress.gov/bill/118th-congress/senate-bill/2714
+https://www.congress.gov/bill/118th-congress/house-bill/6881
+https://www.congress.gov/bill/118th-congress/house-bill/8348
+https://www.congress.gov/bill/118th-congress/house-bill/8353
+https://www.congress.gov/bill/118th-congress/house-bill/7381
+https://www.congress.gov/bill/118th-congress/house-bill/4814
+https://www.congress.gov/bill/118th-congress/house-bill/4683
+https://www.congress.gov/bill/118th-congress/house-bill/206
+https://www.congress.gov/bill/118th-congress/house-bill/6791
+https://www.congress.gov/bill/118th-congress/house-bill/5808
+https://www.congress.gov/bill/118th-congress/senate-bill/3478
+https://www.congress.gov/bill/118th-congress/senate-bill/2597
+https://www.congress.gov/bill/118th-congress/house-bill/7781
+https://www.congress.gov/bill/118th-congress/house-bill/6088
+https://www.congress.gov/bill/118th-congress/house-bill/6466
+https://www.congress.gov/bill/118th-congress/house-bill/7913
+https://www.congress.gov/bill/118th-congress/senate-bill/4664
+https://www.congress.gov/bill/118th-congress/house-bill/9211
+https://www.congress.gov/bill/118th-congress/house-bill/9402
+https://www.congress.gov/bill/118th-congress/house-bill/10262
+https://www.congress.gov/bill/118th-congress/senate-bill/4951
+https://www.congress.gov/bill/118th-congress/house-bill/9475
+https://www.congress.gov/bill/118th-congress/house-bill/6943
+https://www.congress.gov/bill/118th-congress/senate-bill/4236
+https://www.congress.gov/bill/118th-congress/senate-bill/5436
+https://www.congress.gov/bill/118th-congress/senate-bill/3897
+https://www.congress.gov/bill/118th-congress/house-bill/7532
+https://www.congress.gov/bill/118th-congress/house-bill/9639
+https://www.congress.gov/bill/118th-congress/house-bill/9042
+https://www.congress.gov/bill/118th-congress/senate-bill/3875
+https://www.congress.gov/bill/118th-congress/house-bill/10125
+https://www.congress.gov/bill/118th-congress/house-bill/5077
+https://www.congress.gov/bill/118th-congress/house-bill/8756
+https://www.congress.gov/bill/118th-congress/house-bill/9737
+https://www.congress.gov/bill/118th-congress/house-bill/3831
+https://www.congress.gov/bill/118th-congress/house-bill/8858
+https://www.congress.gov/bill/118th-congress/house-bill/8668
+https://www.congress.gov/bill/118th-congress/senate-bill/5539
+https://www.congress.gov/bill/118th-congress/house-bill/9497
+https://www.congress.gov/bill/118th-congress/house-bill/9466
+https://www.congress.gov/bill/118th-congress/house-bill/10263
+https://www.congress.gov/bill/118th-congress/senate-bill/4896
+https://www.congress.gov/bill/118th-congress/senate-bill/3162
+https://www.congress.gov/bill/118th-congress/house-bill/9215
+https://www.congress.gov/bill/118th-congress/house-bill/9720
+https://www.congress.gov/bill/118th-congress/senate-bill/4495
+https://www.congress.gov/bill/118th-congress/senate-bill/3975
+https://www.congress.gov/bill/118th-congress/house-bill/9673
+https://www.congress.gov/bill/118th-congress/senate-bill/4838
+https://www.congress.gov/bill/118th-congress/senate-bill/4714
+https://www.congress.gov/bill/118th-congress/house-bill/7766
+https://www.congress.gov/bill/118th-congress/senate-bill/5058
+https://www.congress.gov/amendment/118th-congress/house-amendment/956
+https://www.congress.gov/bill/118th-congress/house-resolution/1600
+https://www.congress.gov/bill/118th-congress/senate-bill/4596
+https://www.congress.gov/bill/118th-congress/senate-bill/3312
+https://www.congress.gov/bill/118th-congress/house-bill/8700
+https://www.congress.gov/bill/118th-congress/house-bill/6936
+https://www.congress.gov/bill/118th-congress/house-bill/9671
+https://www.congress.gov/bill/118th-congress/house-bill/7603
+https://www.congress.gov/bill/118th-congress/house-bill/10092
+https://www.congress.gov/bill/118th-congress/house-bill/9626
+https://www.congress.gov/bill/118th-congress/senate-bill/4862
+https://www.congress.gov/amendment/118th-congress/house-amendment/955
+https://www.congress.gov/bill/118th-congress/senate-bill/4769
+https://www.congress.gov/bill/118th-congress/senate-bill/4178
+https://www.congress.gov/bill/119th-congress/house-bill/1
+]
+
+Please provide the complete Python code implementing this scraper.
