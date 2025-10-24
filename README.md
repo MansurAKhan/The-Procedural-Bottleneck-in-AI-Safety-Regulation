@@ -8,7 +8,7 @@ This repository contains the research paper, data, and supplementary materials f
 **Workshop:** NeurIPS 2025 Workshop on Regulatable Machine Learning (RegML)
 **View Paper at:** https://openreview.net/pdf?id=OCn2y7QDTB
 
-******-----Coming Soon-----******
+##******-----Coming Soon-----******
 
 
 ## 📊 Repository Contents
@@ -23,9 +23,9 @@ This repository contains the research paper, data, and supplementary materials f
 ## 🔗 Citation
 If you use this work, please cite:
 ```bibtex
-@inproceedings{Khan2025aisafety,
+@inproceedings{khan2025aisafety,
   title={From Proposals to Enactment: The Procedural Bottleneck in AI Safety Regulation},
-  author={ansur Ali Khan, Efe Akengin, Dr. Ahmed Rushdi  },
+  author={Mansur Ali Khan, Efe Akengin, Dr. Ahmed Rushdi  },
   booktitle={NeurIPS 2025 Workshop on Regulatable Machine Learning (RegML)},
   year={2025}
 }
