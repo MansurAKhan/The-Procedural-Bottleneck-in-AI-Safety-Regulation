@@ -27,34 +27,17 @@ A penalized logistic regression model with ridge penalty (C=1.0, max_iterations=
 
 
 ## 📈 Key Findings
-<div style="display: flex; flex-direction: column; align-items: center;">
-
-  <img src="images/bills_action.png"
-       alt="AI Bill Endpoints"
-       width="500"
-       style="margin: 20px 0;" />
-
-  <img src="images/ai_legislation_llm_breakthroughs.png"
-       alt="Quantitative comparison of AI legislation vs LLM breakthroughs"
-       width="500"
-       style="margin: 20px 0;" />
-
-  <img src="images/bills_flow.png"
-       alt="AI Bill Endpoints"
-       width="500"
-       style="margin: 20px 0;" />
-
-  <img src="images/regression_table.png"
-       alt="Logistic Regression Results"
-       width="500"
-       style="margin: 20px 0;" />
-
-  <img src="images/proposals_distribution.png"
-       alt="Comprehensive taxonomy of AI policy subfields for Bills in United States Congress"
-       width="500"
-       style="margin: 20px 0;" />
-
-</div>
+<p align="center">
+  <img src="images/ai_legislation_llm_breakthroughs.png" width="500">
+  <br><br>
+  <img src="images/bills_action.png" width="500">
+  <br><br>
+  <img src="images/proposals_distribution.png" width="300">
+  <br><br>
+  <img src="images/bills_flow.png" width="300">
+  <br><br>
+  <img src="images/regression_table.png" width="500">
+</p>
 
 ## 📌 Recommendations
 **1. Establish dedicated AI Policy committees to address pigeonholing.** If the leadership decides the bill does not fit within its overall agenda, a decision not to act will ‘kill’ the bill just as effectively as a vote against it.<br>
