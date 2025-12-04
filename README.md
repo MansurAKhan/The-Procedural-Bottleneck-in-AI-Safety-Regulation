@@ -8,6 +8,7 @@ This repository contains the research paper, dataset, and supplementary material
 **Authors:** Mansur Ali Khan, Efe Akengin, Dr. Ahmed Rushdi  
 **Workshop:** NeurIPS 2025 Workshop on Regulatable Machine Learning (RegML)  
 **View Paper:** https://openreview.net/pdf?id=OCn2y7QDTB
+**View Website:** https://aisafetyregulation.replit.app
 
 ## 📘 Introduction
 
